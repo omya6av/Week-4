@@ -1,0 +1,40 @@
+package junit.advancedjunit.passwordvalidatortest;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import junit.advancedjunit.passwordvalidator.PasswordValidator;
+import org.junit.jupiter.api.*;
+
+class PasswordValidatorTest {
+
+    @org.testng.annotations.Test
+    void testValidPassword() {
+        assertTrue(PasswordValidator.isValidPassword("StrongP@ss1"));
+        assertTrue(PasswordValidator.isValidPassword("Java1234"));
+        assertTrue(PasswordValidator.isValidPassword("Secure9X"));
+    }
+
+    @Test
+    void testPasswordTooShort() {
+        assertFalse(PasswordValidator.isValidPassword("Short1"));
+        assertFalse(PasswordValidator.isValidPassword("A1b"));
+    }
+
+    @Test
+    void testPasswordWithoutUpperCase() {
+        assertFalse(PasswordValidator.isValidPassword("password123"));
+        assertFalse(PasswordValidator.isValidPassword("lowercase8"));
+    }
+
+    @Test
+    void testPasswordWithoutDigit() {
+        assertFalse(PasswordValidator.isValidPassword("NoDigitPass"));
+        assertFalse(PasswordValidator.isValidPassword("UppercaseOnly"));
+    }
+
+    @Test
+    void testNullOrEmptyPassword() {
+        assertFalse(PasswordValidator.isValidPassword(null));
+        assertFalse(PasswordValidator.isValidPassword(""));
+    }
+}
